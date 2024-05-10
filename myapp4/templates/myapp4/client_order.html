@@ -1,0 +1,41 @@
+{% extends 'hw4_app/base.html' %} {% block title %}Client Order{% endblock %} {%
+block content %}
+
+<h1>{{ client.name }} - Ordered Products</h1>
+
+<h2>Last 7 Days</h2>
+<ul>
+  {% for order in orders_last_7_days %} {% for product in order.products.all %}
+  <li>{{ product.name }} - {{ product.price }}</li>
+  {% endfor %} {% endfor %}
+</ul>
+
+<h2>Last 30 Days</h2>
+<ul>
+  {% for order in orders_last_30_days %} {% for product in order.products.all %}
+  <li>{{ product.name }} - {{ product.price }}</li>
+  {% endfor %} {% endfor %}
+</ul>
+
+<h2>Last 365 Days</h2>
+<ul>
+  {% for order in orders_last_365_days %} {% for product in order.products.all
+  %}
+  <li>{{ product.name }} - {{ product.price }}</li>
+  {% endfor %} {% endfor %}
+</ul>
+
+<h2>All Products</h2>
+<ul>
+  {% for product in all_products %}
+  <li>{{ product.name }} - {{ product.price }}</li>
+  {% endfor %}
+</ul>
+
+<h2>Add Product</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ product_form.as_p }}
+  <button type="submit">Add Product</button>
+</form>
+
+{% endblock %}
